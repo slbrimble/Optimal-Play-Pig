@@ -1,10 +1,10 @@
-import warnings
 
 class Piglet():
     # Constructor
     def __init__(self, T: int = 2):
         self.T = T
-        self.S = {(i,j,k) for i in range(T) for j in range(T) for k in range(T-i)}
+        self.S = [(i,j,k) for i in range(T) for j in range(T) for k in range(T-i)]
+        self.S.reverse()
         self.A = {"flip","hold"}
         self.V = {s:0 for s in self.S}
         self.policy = {s: None for s in self.S}
@@ -29,13 +29,15 @@ class Piglet():
         else:
             return self.V[s]
 
+    # Value function state-action
     def value_action(self,s: tuple[int,int,int], a: str):
         if a == "flip":
-            return (1.0 - self.value((s[1], s[0], 0)) + self.value((s[0], s[1], s[2] + 1))) / 2
+            return (1.0 - self.value((s[1],s[0],0)) + self.value((s[0], s[1], s[2] + 1))) / 2
         elif a == "hold":
-            return 1.0 - self.value((s[1],s[0],0))
+            return 1.0 - self.value((s[1],s[0]+s[2],0))
 
-    def value_iteration(self,gamma: float = 0.9, tol: float =1e-6, iter_max: iter =1000):
+    # Value iteration
+    def value_iteration(self,gamma: float = 1, tol: float =1e-6, iter_max: int = 1000):
         if not (0 < gamma <= 1):  # Validate gamma
             raise ValueError(f"Value {gamma} is out of range (0, 1]")
 
@@ -45,7 +47,7 @@ class Piglet():
             delta = 0  # Track the maximum change in value function
             new_V = self.V.copy()
             for s in self.S:
-                new_V[s] = max([self.value_action(s,a) for a in self.A])
+                self.policy[s], new_V[s] = max(((a, self.value_action(s, a)) for a in self.A), key=lambda x: x[1])
                 self.trace[s].append(new_V[s])
                 delta = max(delta, max(abs(self.V[r] - new_V[r]) for r in self.S))         
             self.V = new_V
@@ -53,23 +55,22 @@ class Piglet():
             
             if delta < tol or iteration_count >= iter_max:
                 if iteration_count >= iter_max:
+                    self.iter = iter_max
                     self.converge = False
-                    warnings.warn(f"Maximum number of iterations ({iter_max}) reached!", RuntimeWarning)
-                break  # Stop if values converge
+                    print(f"WARNING: Maximum number of iterations ({iter_max}) reached!")
+                break
         
-        self.iter = iteration_count
-        self.converge = True
+        if self.converge is None:
+            self.iter = iteration_count
+            self.converge = True
 
-        # Extract the optimal policy
-        for s in self.S:
-            best_action = max(self.A, key=lambda a: self.value_action(s,a))
-            self.policy[s] = best_action
-
+    # Print policy
     def print_policy(self):
         print("Optimal Policy:")
         for state, value in self.policy.items():
             print(f"{state}: {value}")
 
+    # Print value function
     def print_value(self):
         print("Optimal Values:")
         for state, value in self.V.items():
