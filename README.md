@@ -10,7 +10,7 @@ An reproducibility and replication analysis of the results in the paper [*Optima
 
 ## Description
 The repository contains three main directories:
-- `source`: This directory contains the source code of the algorithms implemented base on the article [*Optimal Play of the Dice Game Pig*](https://cupola.gettysburg.edu/csfac/4/). 
+- `source`: This directory contains the source code of the algorithms implemented based on the article [*Optimal Play of the Dice Game Pig*](https://cupola.gettysburg.edu/csfac/4/). 
 
 - `notebooks`: Here, you can find the Jupyter notebooks that explains the use of the source code and reproduce the plots in the review article you could find in the `report` directory. 
 
