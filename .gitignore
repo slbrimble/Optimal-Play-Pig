@@ -52,3 +52,6 @@ Desktop.ini
 # Optional: JetBrains/other IDEs
 .idea/
 *.iml
+
+# Ignore jupyter checkpoints
+**/.ipynb_checkpoints/
