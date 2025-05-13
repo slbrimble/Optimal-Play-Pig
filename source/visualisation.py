@@ -193,3 +193,113 @@ def plot_reachable_states(res: Pig, optimal=False):
     )
 
     return fig
+
+
+def plot_win_prob_contours(pig, levels=(0.03, 0.09, 0.27, 0.81)):
+    """
+    Plot win-probability contour planes at given levels,
+    with shading and labels for each percentage.
+    """
+    T = pig.T
+    # Build Vgrid with default -1 so only real values show
+    Vgrid = np.full((T, T, T), -1.0, dtype=float)
+    for (i, j, k), v in pig.V.items():
+        if 0 <= i < T and 0 <= j < T and 0 <= k < T:
+            Vgrid[i, j, k] = v
+
+    x, y, z = np.mgrid[0:T, 0:T, 0:T]
+    fig = go.Figure()
+
+    # Gray shades from light (low level) to dark (high level)
+    grays = ["#eeeeee", "#cccccc", "#888888", "#444444"]
+
+    for lvl, gray in zip(levels, grays):
+        fig.add_trace(go.Isosurface(
+            x=x.flatten(), y=y.flatten(), z=z.flatten(),
+            value=Vgrid.flatten(),
+            isomin=lvl, isomax=lvl,
+            surface_count=1,
+            caps=dict(x_show=False, y_show=False, z_show=False),
+            showscale=False,
+            opacity=0.7,
+            colorscale=[[0, gray],[1, gray]],
+            name=f"{int(lvl*100)}%"
+        ))
+        # Add a 3D text label at (i=0, j=T-1, k=round(lvl*T))
+        fig.add_trace(go.Scatter3d(
+            x=[0], y=[T-1], z=[round(lvl*T)],
+            mode="text",
+            text=[f"{int(lvl*100)}%"],
+            textposition="middle center",
+            textfont=dict(color=gray, size=14),
+            showlegend=False
+        ))
+
+    # Set a fixed camera to match the paper’s perspective
+    camera = dict(
+        eye=dict(x=1.5, y=-1.8, z=0.8)
+    )
+
+    fig.update_layout(
+        title="Figure 7: Win-Probability Contours for Optimal Play",
+        scene=dict(
+            xaxis_title="Player 1 score (i)",
+            yaxis_title="Player 2 score (j)",
+            zaxis_title="Turn total (k)",
+            camera=camera,
+            xaxis=dict(nticks=5, range=[0,100]),
+            yaxis=dict(nticks=5, range=[0,100]),
+            zaxis=dict(nticks=5, range=[0,100]),
+        ),
+        template="plotly_white",
+        margin=dict(l=0,r=0,b=0,t=30),
+    )
+    return fig
+
+def plot_expected_turns(avg_turns):
+    """
+    Figure 6: Average number of turns to win vs. starting score i.
+    Uses Plotly for a consistent look with other figures.
+    """
+    x = np.arange(len(avg_turns))
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=x,
+        y=avg_turns,
+        mode='lines+markers',
+        name='Avg turns',
+        marker=dict(size=6),
+        line=dict(width=2),
+    ))
+    fig.update_layout(
+        title="Figure 6: Average Turns to Victory",
+        xaxis_title="Starting Score i",
+        yaxis_title="Average Turns to Win",
+        template="plotly_white",
+        margin=dict(l=40, r=20, t=50, b=40),
+    )
+    return fig
+
+def plot_expected_margin(avg_margin):
+    """
+    Figure 7: Average margin of victory vs. starting score i.
+    Uses Plotly for consistency.
+    """
+    x = np.arange(len(avg_margin))
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=x,
+        y=avg_margin,
+        mode='lines+markers',
+        name='Avg margin',
+        marker=dict(size=6),
+        line=dict(width=2),
+    ))
+    fig.update_layout(
+        title="Figure 7: Average Margin of Victory",
+        xaxis_title="Starting Score i",
+        yaxis_title="Average Margin",
+        template="plotly_white",
+        margin=dict(l=40, r=20, t=50, b=40),
+    )
+    return fig
