@@ -160,7 +160,7 @@ def plot_reachable_states(res: Pig, optimal=False):
 
     # Considering the surface as a function (only the minimum turn total)
     for x, y, z in aux_border:
-        if (x, y) not in max_points or z > max_points[(x, y)]:
+        if (x, y) not in max_points or z <= max_points[(x, y)]:
             max_points[(x, y)] = z
 
     # Obtain reachable states, iterate over the opponent score
