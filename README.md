@@ -1,41 +1,41 @@
 # Optimal Play of Pig Game
 
-An reproducibility and replication analysis of the results in the paper [*Optimal Play of the Dice Game Pig*](https://cupola.gettysburg.edu/csfac/4/) by Neller and Presser 2004. 
+A reproducibility and replication analysis of the results in the paper [*Optimal Play of the Dice Game Pig*](https://cupola.gettysburg.edu/csfac/4/) by Neller and Presser 2004.
 
 ## Table of Contents
 
-- [Description](#description)
-- [Contributing](#contributing)
-- [License](#license)
+-   [Description](#description)
+-   [Contributing](#contributing)
+-   [License](#license)
 
-## Description
+## Description {#description}
+
 The repository contains three main directories:
-- `source`: This directory contains the source code of the algorithms implemented based on the article [*Optimal Play of the Dice Game Pig*](https://cupola.gettysburg.edu/csfac/4/). It has four main modules:
 
-> `piglet.py`: Implements the class `Piglet` which obtain the optimal policy for the pig game for a given target.
+-   `source`: This directory contains the source code of the algorithms implemented based on the article [*Optimal Play of the Dice Game Pig*](https://cupola.gettysburg.edu/csfac/4/). It has four main modules:
+
+> `piglet.py`: Implements the class `Piglet` which obtains the optimal policy for the piglet game for a given target.
 >
->  `pig.py`: Implements the class `Pig` which obtain the optimal policy for the pig game for a given target.
+> `pig.py`: Implements the class `Pig` which obtains the optimal policy for the pig game for a given target.
 >
-> `visualisation.py`: Uses previous modules to generate all the figures in the article [*Optimal Play of the Dice Game Pig*](https://cupola.gettysburg.edu/csfac/4/) 
+> `visualisation.py`: Uses previous modules to generate all the figures in the article [*Optimal Play of the Dice Game Pig*](https://cupola.gettysburg.edu/csfac/4/)
 >
-> `simulation.py`: Generate a simulated competition to compare given strategies in the pig game, in particular, the optimal policy obtained by value iteration and the *hold 20* policy.
+> `simulation.py`: Generates a simulated competition to compare given strategies in the pig game, in particular, the optimal policy obtained by value iteration and the *hold at 20* policy.
 
+-   `notebooks`: Here, you can find some Jupyter notebooks that explains the use of the source code.
 
-- `notebooks`: Here, you can find some Jupyter notebooks that explains the use of the source code. 
+-   `report`: In this directory, you can find the review article in the format of a Jupyter notebook in the style of the [ReScience C journal](https://rescience.github.io/) with the results of our reproducibility study.
 
-- `report`: In this directory, you find the review article in the format of a Jupyter notebook in the style of the [ReScience C journal](https://rescience.github.io/) with the results of our reproducibility study.
+-   `images`: Here, you can find some images produced by the notebook in the `report` directory. These images are our reproductions of the ones in the article [*Optimal Play of the Dice Game Pig*](https://cupola.gettysburg.edu/csfac/4/).
 
-- `images`: Here, you can find some images produce by the notebook in the `report` directory. These images are our reproductions to the ones in the article [*Optimal Play of the Dice Game Pig*](https://cupola.gettysburg.edu/csfac/4/).
+## Contributing {#contributing}
 
-## Contributing
+1.  Fork the repository.
+2.  Create a new branch (`git checkout -b feature-branch`).
+3.  Commit your changes (`git commit -m 'Add a new feature'`).
+4.  Push to the branch (`git push origin feature-branch`).
+5.  Open a Pull Request.
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Commit your changes (`git commit -m 'Add a new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Open a Pull Request.
-
-## License
+## License {#license}
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
