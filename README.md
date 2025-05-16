@@ -8,7 +8,7 @@ A reproducibility and replication analysis of the results in the paper [*Optimal
 -   [Contributing](#contributing)
 -   [License](#license)
 
-## Description {#description}
+## Description 
 
 The repository contains three main directories:
 
@@ -28,7 +28,7 @@ The repository contains three main directories:
 
 -   `images`: Here, you can find some images produced by the notebook in the `report` directory. These images are our reproductions of the ones in the article [*Optimal Play of the Dice Game Pig*](https://cupola.gettysburg.edu/csfac/4/).
 
-## Contributing {#contributing}
+## Contributing 
 
 1.  Fork the repository.
 2.  Create a new branch (`git checkout -b feature-branch`).
@@ -36,6 +36,6 @@ The repository contains three main directories:
 4.  Push to the branch (`git push origin feature-branch`).
 5.  Open a Pull Request.
 
-## License {#license}
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
