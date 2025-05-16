@@ -22,7 +22,7 @@ The repository contains three main directories:
 >
 > `simulation.py`: Generates a simulated competition to compare given strategies in the pig game, in particular, the optimal policy obtained by value iteration and the *hold at 20* policy.
 
--   `notebooks`: Here, you can find some Jupyter notebooks that explains the use of the source code.
+-   `notebooks`: Here, you can find some Jupyter notebooks that explain the use of the source code.
 
 -   `report`: In this directory, you can find the review article in the format of a Jupyter notebook in the style of the [ReScience C journal](https://rescience.github.io/) with the results of our reproducibility study.
 
