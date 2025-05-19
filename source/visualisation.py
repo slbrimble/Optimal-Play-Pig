@@ -371,7 +371,7 @@ def plot_cross_section(res:Pig, section: int = 30):
 
     # Layout
     fig.update_layout(
-        title=f'Cross section fot the threshold policy with j={section}',
+        title=f'Cross section for the threshold policy with j={section}',
         yaxis_title='turn total',
         xaxis_title='player 1 score',
         barmode='group',  # optional: group bars if multiple
