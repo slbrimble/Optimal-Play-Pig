@@ -6,7 +6,7 @@ A reproducibility and replication analysis of the results in the paper [*Optimal
 
 -   [Description](#description)
 -   [Usage](#usage)
--   [Exapmle](#example)
+-   [Example](#example)
 -   [Contributing](#contributing)
 -   [License](#license)
 
